@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Créditos en estudio · Finahogar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#ffffff; --ink:#1f2a36; --ink2:#44505e; --muted:#6f7b89; --line:#e9edf1; --soft:#f5f7f9; --accent:#1f3864;
+  --c-des:#1f3864; --c-apr:#2f7d5b; --c-com:#c48a1d; --c-via:#8da2bf; --c-dev:#a08a5a; --c-neg:#b4474b; --c-otro:#9aa3af;
+  --font:'Plus Jakarta Sans','Segoe UI Variable Text','Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:14px;line-height:1.5;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased}
+button,select,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px 96px}
+
+/* Cabecera */
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:26px 0 18px}
+.brand{display:flex;align-items:baseline;gap:12px}
+.brand b{font-size:16px;font-weight:600;letter-spacing:-.01em}
+.brand span{color:var(--muted)}
+.tools{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.status{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12.5px;margin-right:10px}
+.status i{width:7px;height:7px;border-radius:50%;background:var(--c-otro)}
+.status.live i{background:var(--c-apr)}
+.status.err i{background:var(--c-neg)}
+.btn{background:none;border:0;color:var(--ink2);padding:7px 11px;border-radius:8px;cursor:pointer}
+.btn:hover{background:var(--soft)}
+.btn.pri{border:1px solid var(--line)}
+.note{margin:0 0 40px;max-width:760px;color:var(--muted);font-size:13px;min-height:1px}
+.note.bad{color:var(--c-neg)}
+.note a{color:var(--ink);text-decoration:underline;cursor:pointer}
+
+/* Filtros */
+.bar{display:flex;gap:22px;flex-wrap:wrap;align-items:center;margin-bottom:44px}
+.bar input,.bar select{border:0;border-bottom:1px solid var(--line);background:transparent;border-radius:0;padding:7px 2px;color:var(--ink2)}
+.bar input[type=search]{flex:1;min-width:230px}
+.bar select{cursor:pointer}
+.bar select option{color:#18212b;background:#fff}
+.tags{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tag{background:var(--soft);border:0;border-radius:999px;padding:4px 12px;font-size:12.5px;cursor:pointer;color:var(--ink2)}
+.tag b{font-weight:500;margin-left:8px;color:var(--muted)}
+.link{background:none;border:0;color:var(--muted);cursor:pointer;text-decoration:underline;padding:4px}
+
+/* Frase y embudo */
+.hero h2{margin:0 0 28px;font-size:clamp(24px,3.6vw,36px);font-weight:400;letter-spacing:-.025em;line-height:1.22;max-width:800px}
+.seg{display:flex;gap:3px;height:10px;margin-bottom:22px}
+.seg i{display:block;height:100%;min-width:4px;border-radius:3px;cursor:pointer;transition:opacity .15s}
+.seg.has-act i:not(.act){opacity:.3}
+.states{display:grid;grid-template-columns:repeat(6,1fr);gap:6px 18px}
+.st{background:none;border:0;text-align:left;padding:8px 0;cursor:pointer;color:inherit;border-radius:6px}
+.st .l{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:12.5px}
+.st .l i{width:8px;height:8px;border-radius:50%}
+.st .n{display:block;font-size:26px;font-weight:500;letter-spacing:-.02em;line-height:1.25}
+.st .m{display:block;color:var(--muted);font-size:12.5px}
+.st.zero{opacity:.45}
+.st.act .n{color:var(--accent)}
+.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:34px;padding-top:24px;border-top:1px solid var(--line)}
+.mt .l{color:var(--muted);font-size:12.5px}
+.mt .v{font-size:21px;font-weight:500;letter-spacing:-.015em}
+.mt .s{color:var(--muted);font-size:12px}
+
+/* Secciones */
+section{margin-top:72px}
+h3{margin:0 0 4px;font-size:15px;font-weight:600;letter-spacing:-.005em}
+.hint{margin:0 0 18px;color:var(--muted);font-size:12.5px}
+.cols{display:grid;grid-template-columns:1.5fr 1fr;gap:56px}
+.cols.eq{grid-template-columns:1fr 1fr}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%}
+th{text-align:left;font-weight:500;color:var(--muted);font-size:12.5px;padding:8px 12px 8px 0;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 12px 11px 0;border-bottom:1px solid var(--line);white-space:nowrap}
+th.num,td.num{text-align:right;padding-right:0;padding-left:14px}
+th.sortable{cursor:pointer;user-select:none}
+th.sortable:hover{color:var(--ink)}
+tbody tr.click{cursor:pointer}
+tbody tr.click:hover td{background:var(--soft)}
+tr.act td{background:var(--soft)}
+tfoot th{border-bottom:0;color:var(--ink);font-weight:600}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;vertical-align:middle}
+.mini{display:flex;height:4px;width:110px;border-radius:2px;background:var(--soft);overflow:hidden}
+.mini i{display:block;height:100%}
+svg{width:100%;height:auto;display:block;overflow:visible}
+svg .gl{stroke:var(--line);stroke-width:1}
+svg .ax{fill:var(--muted);font-size:11px;font-family:var(--font)}
+svg .tv{fill:var(--ink2);font-size:11px;font-weight:500;font-family:var(--font)}
+svg .meta{stroke:var(--muted);stroke-width:1.2;stroke-dasharray:5 5}
+svg .metat{fill:var(--muted);font-size:11px;font-family:var(--font)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;color:var(--muted);font-size:12.5px}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+.row{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.row:hover .nm{text-decoration:underline}
+.row .nm{font-weight:500}
+.row .sub{color:var(--muted);font-size:12.5px}
+.row .amt{font-weight:500;white-space:nowrap}
+.row.act .nm{color:var(--accent)}
+.q .qn{font-weight:600}
+.q.zero .qn{font-weight:400;color:var(--muted)}
+.empty{color:var(--muted);padding:18px 0}
+.more{display:block;margin:18px auto 0;border:1px solid var(--line)}
+.foot{margin-top:72px;color:var(--muted);font-size:12px}
+
+/* Panel de detalle */
+#veil{position:fixed;inset:0;background:rgba(15,20,26,.28);display:none;z-index:40}
+#veil.on{display:block}
+#drawer{position:fixed;top:0;right:0;height:100%;width:min(460px,100%);background:var(--bg);box-shadow:-1px 0 0 var(--line),-24px 0 48px rgba(15,20,26,.12);transform:translateX(104%);transition:transform .24s ease;z-index:50;display:flex;flex-direction:column}
+#drawer.open{transform:none}
+#drawer .hd{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding:28px 28px 8px}
+#drawer h4{margin:0 0 4px;font-size:20px;font-weight:600;letter-spacing:-.015em}
+#drawer .bd{padding:8px 28px 40px;overflow-y:auto;flex:1}
+.x{background:none;border:0;font-size:24px;line-height:1;cursor:pointer;color:var(--muted);padding:2px 6px;border-radius:6px}
+.x:hover{background:var(--soft)}
+.kv{display:grid;grid-template-columns:128px 1fr;gap:10px 12px;margin:18px 0 28px}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;word-break:break-word}
+.tl{list-style:none;margin:10px 0 28px 5px;padding:0 0 0 20px;border-left:1px solid var(--line)}
+.tl li{position:relative;margin-bottom:18px}
+.tl li::before{content:"";position:absolute;left:-26px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:1px solid var(--muted)}
+.tl li.on::before{background:var(--c-apr);border-color:var(--c-apr)}
+.tl .dd{color:var(--muted);font-size:12.5px}
+.notes{white-space:pre-wrap;color:var(--ink2);line-height:1.6}
+dialog{border:0;border-radius:14px;max-width:620px;width:calc(100% - 32px);padding:0;background:var(--bg);color:var(--ink);box-shadow:0 24px 70px rgba(0,0,0,.28)}
+dialog::backdrop{background:rgba(15,20,26,.45)}
+dialog .in{padding:28px 30px}
+dialog h4{margin:0 0 10px;font-size:18px;font-weight:600}
+dialog ol{padding-left:20px;color:var(--ink2)}
+dialog li{margin-bottom:9px}
+dialog p{color:var(--ink2)}
+dialog code{background:var(--soft);padding:1px 6px;border-radius:5px;font-size:12px}
+.setup{max-width:640px;padding:64px 0 24px}
+.setup h2{margin:0 0 16px;font-size:clamp(24px,3.4vw,32px);font-weight:400;letter-spacing:-.025em;line-height:1.25}
+.setup p,.setup li{color:var(--ink2);max-width:600px}
+.setup ol{padding-left:20px;margin:14px 0 28px}
+.setup li{margin-bottom:8px}
+[hidden]{display:none!important}
+@media (max-width:900px){
+  .wrap{padding:0 18px 80px}
+  .states{grid-template-columns:repeat(3,1fr)}
+  .metrics{grid-template-columns:repeat(2,1fr)}
+  .cols,.cols.eq{grid-template-columns:1fr;gap:56px}
+  section{margin-top:56px}
+}
+@media (prefers-reduced-motion: reduce){ #drawer,.seg i{transition:none} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="brand"><b>Finahogar</b><span>Créditos en estudio</span></div>
+  <div class="tools">
+    <span id="status" class="status"><i></i><span id="statusTxt">Conectando…</span></span>
+    <button id="btnRefresh" class="btn" title="Actualizar ahora" aria-label="Actualizar ahora">Actualizar</button>
+    <button id="btnHelp" class="btn" aria-label="Ayuda para conectar">Ayuda</button>
+  </div>
+</header>
+<p id="banner" class="note"></p>
+
+<div id="setup" class="setup" hidden>
+  <h2>Falta conectar el tablero con el Excel</h2>
+  <p>Este tablero lee directamente el archivo en OneDrive y se actualiza solo, en segundos, cada vez que alguien guarda un cambio. No hay que cargar ningún archivo.</p>
+  <p>Para activarlo, TI debe completar una sola vez tres datos al inicio de este archivo:</p>
+  <ol>
+    <li><b>CLIENT_ID</b>: Id de la aplicación registrada en Microsoft Entra ID.</li>
+    <li><b>TENANT_ID</b>: Id de directorio de Finahogar.</li>
+    <li><b>FILE_SHARE_URL</b>: vínculo del Excel en OneDrive o SharePoint.</li>
+  </ol>
+  <button class="btn pri" id="btnHelp2">Ver la guía completa para TI</button>
+</div>
+
+<div id="dash">
+
+<div class="bar">
+  <input id="q" type="search" placeholder="Buscar cliente, cédula, asesor o nota" aria-label="Buscar">
+  <select id="fEstado" aria-label="Estado"></select>
+  <select id="fAsesor" aria-label="Asesor"></select>
+  <select id="fLinea" aria-label="Línea de crédito"></select>
+  <select id="fPeriodo" aria-label="Período">
+    <option value="all">Todo el período</option>
+    <option value="mes">Ingresadas este mes</option>
+    <option value="30">Últimos 30 días</option>
+    <option value="90">Últimos 90 días</option>
+  </select>
+  <span id="active" class="tags"></span>
+</div>
+
+<div class="hero">
+  <h2 id="headline"></h2>
+  <div id="seg" class="seg" aria-hidden="true"></div>
+  <div id="states" class="states"></div>
+  <div id="metrics" class="metrics"></div>
+</div>
+
+<section class="cols">
+  <div>
+    <h3>Productividad por asesor</h3>
+    <p class="hint">Haga clic en un asesor para filtrar todo el tablero.</p>
+    <div id="asesores" class="scroll"></div>
+  </div>
+  <div>
+    <h3>Pendientes de comité</h3>
+    <p id="sess" class="hint"></p>
+    <div id="pend"></div>
+  </div>
+</section>
+
+<section class="cols eq">
+  <div>
+    <h3>Solicitudes por mes de ingreso</h3>
+    <p class="hint">Cada barra se divide según el estado actual.</p>
+    <div id="chartIngreso"></div>
+    <div id="legend" class="legend"></div>
+  </div>
+  <div>
+    <h3>Desembolsado frente a la meta</h3>
+    <p class="hint">Monto solicitado de los créditos desembolsados, por mes de desembolso.</p>
+    <div id="chartDesemb"></div>
+  </div>
+</section>
+
+<section>
+  <h3>Solicitudes <span id="tcount" class="hint" style="margin:0 0 0 6px"></span></h3>
+  <p class="hint">Haga clic en una fila para ver su recorrido y sus notas.</p>
+  <div class="scroll"><table id="tbl"></table></div>
+  <button id="btnMore" class="btn more" style="display:none">Mostrar más</button>
+</section>
+
+<section class="cols eq">
+  <div>
+    <h3>Datos por completar en el Excel</h3>
+    <p class="hint">Haga clic en un punto para ver los casos en la tabla.</p>
+    <div id="quality"></div>
+  </div>
+  <div></div>
+</section>
+
+<div class="foot" id="foot"></div>
+</div>
+</div>
+
+<div id="veil"></div>
+<aside id="drawer" aria-hidden="true" role="dialog" aria-label="Detalle de la solicitud"></aside>
+
+<dialog id="help"><div class="in">
+  <h4>Cómo conectar el tablero con el Excel</h4>
+  <p>El tablero solo lee el Excel; no puede modificarlo. Cada persona entra con su cuenta de Microsoft de la empresa y ve los datos solo si tiene acceso al archivo. Cuando alguien guarda un cambio, el tablero se actualiza solo en unos segundos.</p>
+  <ol>
+    <li>Publicar este archivo con el nombre <code>index.html</code> en una dirección <code>https://</code> (por ejemplo, GitHub Pages).</li>
+    <li>En entra.microsoft.com: <i>Entra ID → Registros de aplicaciones → Nuevo registro</i>, cuentas solo de este directorio, plataforma <b>Aplicación de página única (SPA)</b> y como URI de redirección la dirección del paso 1 terminada en <code>/</code>.</li>
+    <li>En <i>Permisos de API</i>: Microsoft Graph, permiso delegado <code>Files.Read.All</code>.</li>
+    <li>Copiar el <b>Id. de aplicación (cliente)</b> y el <b>Id. de directorio (inquilino)</b> en el bloque <code>CONFIG</code> al inicio del script.</li>
+    <li>En SharePoint u OneDrive: <i>Compartir → Copiar vínculo</i> del Excel y pegarlo en <code>FILE_SHARE_URL</code>.</li>
+    <li>El Excel debe conservar la tabla <code>TblCreditos</code> y tener activado el Autoguardado.</li>
+  </ol>
+  <p>Este archivo no contiene datos de clientes: todo se lee del Excel después de iniciar sesión.</p>
+  <div style="text-align:right"><button class="btn pri" id="helpClose">Entendido</button></div>
+</div></dialog>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@azure/msal-browser@2.38.3/lib/msal-browser.min.js"></script>
+<script>
+(function(){
+'use strict';
+
+/* ============ CONFIGURACIÓN (la completa TI una sola vez) ============ */
+const CONFIG = {
+  CLIENT_ID: "",          // Id de aplicación (cliente) registrado en Entra ID
+  TENANT_ID: "",          // Id de directorio (inquilino); si se deja vacío usa "organizations"
+  FILE_SHARE_URL: "",     // Vínculo de OneDrive/SharePoint del Excel (solo personas de la organización)
+  DRIVE_ID: "",           // Alternativa al vínculo: Id de la unidad ...
+  ITEM_ID: "",            // ... e Id del archivo
+  TABLE_NAME: "TblCreditos",
+  REFRESH_SECONDS: 15,    // cada cuántos segundos se revisa si el archivo cambió
+  META_MES: 80000000      // meta mensual de colocación (igual a 'Cuadro de productividad'!AB1)
+};
+const SCOPES = ['User.Read','Files.Read.All'];
+
+
+/* ============ UTILIDADES ============ */
+const $ = s => document.querySelector(s);
+const esc = s => String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pad = n => String(n).padStart(2,'0');
+function fmt(n,dec){ dec=dec||0; if(n==null||isNaN(n)) return '—'; const neg=n<0; const p=Math.abs(n).toFixed(dec).split('.'); const s=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,'.')+(p[1]?','+p[1]:''); return (neg?'-':'')+s; }
+const money = v => v==null?'—':'$'+fmt(v);
+const moneyM = v => v==null?'—':(Math.abs(v)>=1e6?'$'+fmt(v/1e6,1)+' M':money(v));
+const fmtD = d => d?pad(d.getUTCDate())+'/'+pad(d.getUTCMonth()+1)+'/'+d.getUTCFullYear():'—';
+const MESES=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+const DIAS=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+const MESES_L=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+const norm = s => String(s==null?'':s).replace(/\u00a0/g,' ').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[¿?]/g,'').replace(/\s+/g,' ').trim().toLowerCase();
+const clean = s => String(s==null?'':s).replace(/\u00a0/g,' ').trim();
+
+function toDate(v){
+  if(v==null||v==='') return null;
+  if(v instanceof Date) return isNaN(v)?null:new Date(Date.UTC(v.getFullYear(),v.getMonth(),v.getDate()));
+  if(typeof v==='number') return (v>20000&&v<80000)?new Date(Math.round((v-25569)*864e5)):null;
+  const s=clean(v); if(!s) return null; let m;
+  if((m=s.match(/^(\d{4})-(\d{2})-(\d{2})/))) return new Date(Date.UTC(+m[1],+m[2]-1,+m[3]));
+  if((m=s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/))) return new Date(Date.UTC(+m[3],+m[2]-1,+m[1]));
+  return null;
+}
+function toNum(v){
+  if(typeof v==='number') return isFinite(v)?v:null;
+  let s=clean(v).replace(/[$\s]/g,''); if(!s) return null;
+  if(/^\d{1,3}(\.\d{3})+$/.test(s)) s=s.replace(/\./g,''); else s=s.replace(',','.');
+  const n=parseFloat(s); return isNaN(n)?null:n;
+}
+const dd = (a,b) => (a&&b)?Math.round((b-a)/864e5):null;
+
+const ESTADOS=['Viable','Devuelto','Ingresa a comité','Aprobada','Desembolsado','Negado'];
+const COLORS={'Viable':'#2E75B6','Devuelto':'#7F6000','Ingresa a comité':'#C07000','Aprobada':'#1A6B3C','Desembolsado':'#1F3864','Negado':'#C00000','Otro':'#8791a5'};
+function normEstado(v){
+  const s=norm(v);
+  if(s==='aprobada'||s==='aprobado') return 'Aprobada';
+  if(s==='desembolsado') return 'Desembolsado';
+  if(s==='ingresa a comite'||s==='escalamiento a comite') return 'Ingresa a comité';
+  if(s==='negado'||s==='rechazada'||s==='rechazado') return 'Negado';
+  if(s==='viable') return 'Viable';
+  if(s==='devuelto') return 'Devuelto';
+  return s?clean(v):'Sin estado';
+}
+const colorOf = e => COLORS[e]||COLORS.Otro;
+
+/* ============ LECTURA DE LA TABLA (misma lógica para Graph y para archivo local) ============ */
+function rowsFromMatrix(M){
+  let h=-1;
+  for(let i=0;i<Math.min(M.length,30);i++){ const n=(M[i]||[]).map(norm); if(n.includes('cliente')&&n.includes('estado actual')){h=i;break;} }
+  if(h<0) throw new Error('No se encontró el encabezado (Cliente / Estado actual) en la hoja Control de créditos.');
+  const H=M[h].map(norm);
+  const find=(fn)=>H.findIndex(fn);
+  const ix={
+    n:find(x=>x==='n.'||x==='n'), cliente:find(x=>x==='cliente'), cedula:find(x=>x==='cedula'),
+    linea:find(x=>x.startsWith('linea')), pagaduria:find(x=>x==='pagaduria'), asesor:find(x=>x==='asesor'),
+    ingreso:find(x=>x.includes('ingreso solicitud')),
+    viable:find(x=>x.includes('viable')&&x.includes('respuesta')),
+    estado:find(x=>x==='estado actual'),
+    comite:find(x=>x.includes('respuesta')&&x.includes('comite')),
+    monto:find(x=>x==='monto solicitado'), fianza:find(x=>x.includes('fianza')),
+    desemb:find(x=>x==='desembolsado'), fDesemb:find(x=>x==='fecha desembolso'),
+    notas:find(x=>x==='notas')
+  };
+  if(ix.cliente<0||ix.estado<0) throw new Error('Faltan columnas obligatorias.');
+  const g=(r,k)=>ix[k]>=0?r[ix[k]]:null;
+  const out=[];
+  for(let i=h+1;i<M.length;i++){
+    const r=M[i]||[]; const cli=clean(g(r,'cliente')); if(!cli) continue;
+    const o={
+      n:g(r,'n')||out.length+1, cliente:cli, cedula:clean(g(r,'cedula')), linea:clean(g(r,'linea')), pagaduria:clean(g(r,'pagaduria')),
+      asesor:clean(g(r,'asesor'))||'(sin asesor)', ingreso:toDate(g(r,'ingreso')), viable:toDate(g(r,'viable')), comite:toDate(g(r,'comite')),
+      estado:normEstado(g(r,'estado')), monto:toNum(g(r,'monto')), fianza:toNum(g(r,'fianza')),
+      desembolsado:norm(g(r,'desemb'))==='si', fDesemb:toDate(g(r,'fDesemb')), notas:clean(g(r,'notas'))
+    };
+    if(o.fianza==null&&o.monto!=null) o.fianza=o.monto*1.0384;
+    o.dViab=dd(o.ingreso,o.viable); o.dAprob=dd(o.viable,o.comite); o.dDesemb=dd(o.comite,o.fDesemb);
+    out.push(o);
+  }
+  return out;
+}
+
+/* ============ ESTADO ============ */
+const state={rows:[],source:'connecting',q:'',estado:'',asesor:'',linea:'',periodo:'all',quality:'',sort:{k:'n',dir:1},limit:100,fileName:'',fileMeta:null,error:''};
+
+const CHECKS=[
+  {id:'linea',label:'Sin línea de crédito',fn:r=>!r.linea},
+  {id:'pagaduria',label:'Sin pagaduría',fn:r=>!r.pagaduria},
+  {id:'monto',label:'Sin monto solicitado',fn:r=>r.monto==null},
+  {id:'comite',label:'Aprobada o desembolsada sin fecha de comité',fn:r=>['Aprobada','Desembolsado'].includes(r.estado)&&!r.comite},
+  {id:'neg',label:'Tiempos negativos (fechas incoherentes)',fn:r=>[r.dViab,r.dAprob,r.dDesemb].some(x=>x!=null&&x<0)},
+  {id:'desemb',label:'Estado y desembolso no coinciden',fn:r=>r.estado==='Desembolsado'?(!r.desembolsado||!r.fDesemb):(r.desembolsado||!!r.fDesemb)}
+];
+
+/* ============ FILTROS ============ */
+function periodOK(r){
+  if(state.periodo==='all') return true; const d=r.ingreso; if(!d) return false;
+  const now=new Date(); const today=Date.UTC(now.getFullYear(),now.getMonth(),now.getDate()); const age=(today-d)/864e5;
+  if(state.periodo==='30') return age<=30; if(state.periodo==='90') return age<=90;
+  if(state.periodo==='mes') return d.getUTCFullYear()===now.getFullYear()&&d.getUTCMonth()===now.getMonth();
+  return true;
+}
+function filtered(skip){
+  const q=norm(state.q); const chk=CHECKS.find(c=>c.id===state.quality);
+  return state.rows.filter(r=>{
+    if(skip!=='estado'&&state.estado&&r.estado!==state.estado) return false;
+    if(skip!=='asesor'&&state.asesor&&r.asesor!==state.asesor) return false;
+    if(state.linea&&(state.linea==='(sin línea)'?r.linea:r.linea!==state.linea)) return false;
+    if(!periodOK(r)) return false;
+    if(chk&&!chk.fn(r)) return false;
+    if(q&&!norm([r.cliente,r.cedula,r.asesor,r.linea,r.pagaduria,r.notas].join(' ')).includes(q)) return false;
+    return true;
+  });
+}
+const avg = a => { const v=a.filter(x=>x!=null); return v.length?v.reduce((s,x)=>s+x,0)/v.length:null; };
+const sum = a => a.reduce((s,x)=>s+(x||0),0);
+
+/* ============ RENDER ============ */
+const ORDER=['Desembolsado','Aprobada','Ingresa a comité','Viable','Devuelto','Negado'];
+const LABEL={'Ingresa a comité':'En comité'};
+const pl=(n,s,p)=>fmt(n)+' '+(n===1?s:p);
+const joinEs=a=>a.length<2?a.join(''):a.slice(0,-1).join(', ')+' y '+a[a.length-1];
+const cnt=(x,e)=>x.filter(r=>r.estado===e).length;
+
+function render(){
+  const setup=state.source==='setup', waiting=!state.rows.length;
+  $('#setup').hidden=!setup; $('#dash').hidden=setup;
+  renderStatus(); if(setup) return;
+  if(waiting){ $('#headline').textContent=state.error?'No fue posible leer el Excel.':'Conectando con el Excel en OneDrive…'; ['#seg','#states','#metrics','#asesores','#pend','#chartIngreso','#chartDesemb','#legend','#quality','#tbl','#active'].forEach(s=>$(s).innerHTML=''); $('#tcount').textContent=''; $('#sess').textContent=''; return; }
+  renderFilters(); renderHero(); renderAsesores(); renderCharts(); renderPend(); renderQuality(); renderTable();
+}
+function renderFilters(){
+  const opt=(arr,first)=>'<option value="">'+first+'</option>'+arr.map(x=>'<option value="'+esc(x)+'">'+esc(x)+'</option>').join('');
+  const asesores=[...new Set(state.rows.map(r=>r.asesor))].sort();
+  const lineas=[...new Set(state.rows.map(r=>r.linea||'(sin línea)'))].sort();
+  const extra=[...new Set(state.rows.map(r=>r.estado).filter(e=>!ESTADOS.includes(e)))];
+  $('#fEstado').innerHTML=opt(ESTADOS.concat(extra),'Todos los estados'); $('#fEstado').value=state.estado;
+  $('#fAsesor').innerHTML=opt(asesores,'Todos los asesores'); $('#fAsesor').value=state.asesor;
+  $('#fLinea').innerHTML=opt(lineas,'Todas las líneas'); $('#fLinea').value=state.linea;
+  $('#fPeriodo').value=state.periodo;
+  const chips=[]; const mk=(k,l)=>chips.push('<button class="tag" data-clear="'+k+'">'+esc(l)+'<b>×</b></button>');
+  if(state.estado) mk('estado','Estado: '+state.estado);
+  if(state.asesor) mk('asesor','Asesor: '+state.asesor);
+  if(state.linea) mk('linea','Línea: '+state.linea);
+  if(state.quality) mk('quality',CHECKS.find(c=>c.id===state.quality).label);
+  if(chips.length) chips.push('<button class="link" data-clear="all">Limpiar</button>');
+  $('#active').innerHTML=chips.join('');
+}
+function renderHero(){
+  const f=filtered();
+  const total=f.length, des=cnt(f,'Desembolsado'), aprob=cnt(f,'Aprobada')+des, neg=cnt(f,'Negado'), est=cnt(f,'Viable')+cnt(f,'Devuelto')+cnt(f,'Ingresa a comité');
+  let h;
+  if(!total) h='Ninguna solicitud coincide con los filtros actuales.';
+  else{
+    const parts=[];
+    if(aprob) parts.push(pl(aprob,'aprobada','aprobadas')+(des?' ('+pl(des,'desembolsada','desembolsadas')+')':''));
+    if(neg) parts.push(pl(neg,'negada','negadas'));
+    if(est) parts.push(fmt(est)+' en estudio');
+    h=pl(total,'solicitud','solicitudes')+(parts.length?': '+joinEs(parts):'')+'.';
+  }
+  $('#headline').textContent=h;
+  const fe=filtered('estado');
+  const list=ORDER.concat([...new Set(fe.map(r=>r.estado).filter(e=>!ORDER.includes(e)))]);
+  const tot=sum(fe.map(r=>r.monto));
+  $('#seg').className='seg'+(state.estado?' has-act':'');
+  $('#seg').innerHTML=list.map(e=>{ const n=cnt(fe,e); return n?'<i data-estado="'+esc(e)+'" class="'+(state.estado===e?'act':'')+'" style="flex:'+n+';background:'+colorOf(e)+'" title="'+esc(LABEL[e]||e)+': '+n+'"></i>':''; }).join('');
+  $('#states').innerHTML=list.map(e=>{
+    const x=fe.filter(r=>r.estado===e), m=sum(x.map(r=>r.monto));
+    return '<button class="st'+(x.length?'':' zero')+(state.estado===e?' act':'')+'" data-estado="'+esc(e)+'"><span class="l"><i style="background:'+colorOf(e)+'"></i>'+esc(LABEL[e]||e)+'</span><span class="n">'+x.length+'</span><span class="m">'+moneyM(m)+(tot&&m?' · '+fmt(m/tot*100,1)+' %':'')+'</span></button>';
+  }).join('');
+  const dv=avg(f.map(r=>r.dViab)), da=avg(f.map(r=>r.dAprob));
+  const negT=f.filter(r=>[r.dViab,r.dAprob].some(x=>x!=null&&x<0)).length;
+  const mt=(l,v,s)=>'<div class="mt"><div class="l">'+l+'</div><div class="v">'+v+'</div><div class="s">'+(s||'&nbsp;')+'</div></div>';
+  $('#metrics').innerHTML=
+    mt('Tasa de aprobación',total?fmt(aprob/total*100,1)+' %':'—','aprobadas y desembolsadas')+
+    mt('Tasa de rechazo',total?fmt(neg/total*100,1)+' %':'—','sobre el total de solicitudes')+
+    mt('Monto estudiado',moneyM(sum(f.map(r=>r.monto))),'suma de montos solicitados')+
+    mt('Tiempo hasta viabilidad',dv==null?'—':fmt(dv,1)+' días','promedio desde el ingreso')+
+    mt('Tiempo hasta aprobación',da==null?'—':fmt(da,1)+' días',negT?negT+' caso(s) con fechas incoherentes':'promedio desde la viabilidad');
+}
+function renderAsesores(){
+  const f=filtered('asesor'); const names=[...new Set(f.map(r=>r.asesor))];
+  const data=names.map(a=>{ const x=f.filter(r=>r.asesor===a); const ap=x.filter(r=>r.estado==='Aprobada'), de=x.filter(r=>r.estado==='Desembolsado');
+    return {a,sol:x.length,ad:ap.length+de.length,neg:x.filter(r=>r.estado==='Negado').length,mA:sum(ap.map(r=>r.monto)),mD:sum(de.map(r=>r.monto))}; })
+    .sort((p,q)=>(q.mA+q.mD)-(p.mA+p.mD)||q.sol-p.sol);
+  if(!data.length){ $('#asesores').innerHTML='<div class="empty">Sin datos con los filtros actuales.</div>'; return; }
+  const mx=Math.max(1,...data.map(d=>d.mA+d.mD));
+  const T=data.reduce((t,d)=>({sol:t.sol+d.sol,ad:t.ad+d.ad,neg:t.neg+d.neg,mA:t.mA+d.mA,mD:t.mD+d.mD}),{sol:0,ad:0,neg:0,mA:0,mD:0});
+  $('#asesores').innerHTML='<table><thead><tr><th>Asesor</th><th class="num">Solicitudes</th><th class="num">Aprobadas</th><th class="num">Negadas</th><th class="num">Monto aprobado</th><th class="num">Desembolsado</th><th></th></tr></thead><tbody>'+
+   data.map(d=>'<tr class="click'+(state.asesor===d.a?' act':'')+'" data-asesor="'+esc(d.a)+'"><td>'+esc(d.a)+'</td><td class="num">'+d.sol+'</td><td class="num">'+d.ad+'</td><td class="num">'+d.neg+'</td><td class="num">'+moneyM(d.mA)+'</td><td class="num">'+moneyM(d.mD)+'</td>'+
+     '<td style="padding-left:16px"><div class="mini" title="Desembolsado '+money(d.mD)+' · Aprobado '+money(d.mA)+'"><i style="width:'+(d.mD/mx*100)+'%;background:var(--c-des)"></i><i style="width:'+(d.mA/mx*100)+'%;background:var(--c-apr)"></i></div></td></tr>').join('')+
+   '</tbody><tfoot><tr><th>Total</th><th class="num">'+T.sol+'</th><th class="num">'+T.ad+'</th><th class="num">'+T.neg+'</th><th class="num">'+moneyM(T.mA)+'</th><th class="num">'+moneyM(T.mD)+'</th><th></th></tr></tfoot></table>';
+}
+function niceMax(v){ const p=Math.pow(10,Math.floor(Math.log10(v))); const r=v/p; const k=r<=1?1:r<=2?2:r<=4?4:r<=5?5:10; return k*p; }
+function chartSVG(o){
+  const W=520,H=230,m={l:46,r:4,t:22,b:28},iw=W-m.l-m.r,ih=H-m.t-m.b,n=o.labels.length;
+  if(!n) return '<div class="empty">Sin datos para graficar.</div>';
+  const totals=o.labels.map((_,i)=>o.series.reduce((a,s)=>a+(s.values[i]||0),0));
+  const max=niceMax(Math.max(o.minMax||1,o.meta||0,...totals)); const y=v=>m.t+ih-(v/max)*ih; const step=iw/n, bw=Math.min(40,step*.5);
+  let g='';
+  [0,.5,1].forEach(t=>{ const v=max*t; const lab=o.yfmt(v); g+='<line class="gl" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+y(v)+'" y2="'+y(v)+'"/>'+(lab===''?'':'<text class="ax" x="'+(m.l-8)+'" y="'+(y(v)+4)+'" text-anchor="end">'+lab+'</text>'); });
+  o.labels.forEach((lb,i)=>{
+    const x=m.l+step*i+(step-bw)/2; let acc=0;
+    o.series.forEach(s=>{ const v=s.values[i]||0; if(v>0){ g+='<rect x="'+x+'" y="'+y(acc+v)+'" width="'+bw+'" height="'+((v/max)*ih)+'" rx="2" style="fill:'+s.color+';stroke:var(--bg);stroke-width:1"><title>'+esc(lb)+' · '+esc(s.name)+': '+o.tfmt(v)+'</title></rect>'; acc+=v; } });
+    g+='<text class="ax" x="'+(x+bw/2)+'" y="'+(H-8)+'" text-anchor="middle">'+esc(lb)+'</text>';
+    if(totals[i]>0) g+='<text class="tv" x="'+(x+bw/2)+'" y="'+(y(totals[i])-6)+'" text-anchor="middle">'+o.vfmt(totals[i])+'</text>';
+  });
+  if(o.meta) g+='<line class="meta" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+y(o.meta)+'" y2="'+y(o.meta)+'"/><text class="metat" x="'+(W-m.r)+'" y="'+(y(o.meta)-6)+'" text-anchor="end">Meta '+moneyM(o.meta)+'</text>';
+  return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(o.aria)+'">'+g+'</svg>';
+}
+function monthKey(d){ return d.getUTCFullYear()*12+d.getUTCMonth(); }
+function renderCharts(){
+  const f=filtered();
+  const keys=[]; f.forEach(r=>{ if(r.ingreso) keys.push(monthKey(r.ingreso)); if(r.estado==='Desembolsado'&&r.fDesemb) keys.push(monthKey(r.fDesemb)); });
+  if(!keys.length){ $('#chartIngreso').innerHTML=$('#chartDesemb').innerHTML='<div class="empty">Sin datos para graficar.</div>'; $('#legend').innerHTML=''; return; }
+  const a=Math.min(...keys), b=Math.max(...keys); const ks=[]; for(let k=a;k<=b;k++) ks.push(k);
+  const labels=ks.map(k=>MESES[k%12]+' '+String(Math.floor(k/12)).slice(2));
+  const present=ORDER.concat([...new Set(f.map(r=>r.estado).filter(e=>!ORDER.includes(e)))]);
+  const series=present.map(e=>({name:LABEL[e]||e,color:colorOf(e),values:ks.map(k=>f.filter(r=>r.estado===e&&r.ingreso&&monthKey(r.ingreso)===k).length)})).filter(s=>s.values.some(v=>v>0));
+  $('#chartIngreso').innerHTML=chartSVG({labels,series,minMax:4,yfmt:v=>Number.isInteger(v)?String(v):'',vfmt:v=>String(v),tfmt:v=>v+' solicitud(es)',aria:'Solicitudes por mes de ingreso, divididas por estado'});
+  $('#legend').innerHTML=series.map(s=>'<span><i style="background:'+s.color+'"></i>'+esc(s.name)+'</span>').join('');
+  const dv=ks.map(k=>sum(f.filter(r=>r.estado==='Desembolsado'&&r.fDesemb&&monthKey(r.fDesemb)===k).map(r=>r.monto)));
+  $('#chartDesemb').innerHTML=chartSVG({labels,series:[{name:'Desembolsado',color:'var(--c-des)',values:dv}],meta:CONFIG.META_MES,yfmt:v=>v===0?'0':'$'+fmt(v/1e6,v%1e6?1:0)+' M',vfmt:v=>moneyM(v),tfmt:v=>money(v),aria:'Monto desembolsado por mes frente a la meta mensual'});
+}
+function nextSession(){
+  const now=new Date();
+  for(let i=0;i<8;i++){ const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()+i); if((d.getDay()===2||d.getDay()===4)&&(i>0||now.getHours()<17)) return d; }
+  return null;
+}
+function renderPend(){
+  const today=new Date(); const t0=Date.UTC(today.getFullYear(),today.getMonth(),today.getDate());
+  const p=state.rows.filter(r=>r.estado==='Ingresa a comité').sort((a,b)=>(a.ingreso||0)-(b.ingreso||0));
+  const s=nextSession();
+  $('#sess').textContent=s?'Próxima sesión ordinaria: '+DIAS[s.getDay()]+' '+s.getDate()+' de '+MESES_L[s.getMonth()]+', 5:00 p. m.':'';
+  $('#pend').innerHTML=p.length?p.map(r=>{ const d=r.ingreso?Math.round((t0-r.ingreso)/864e5):null;
+    return '<div class="row" data-open="'+state.rows.indexOf(r)+'"><div><div class="nm"><span class="dot" style="background:var(--c-com)"></span>'+esc(r.cliente)+'</div><div class="sub">'+esc(r.asesor)+' · '+esc(r.linea||'sin línea')+(d!=null?' · '+d+' día(s) desde el ingreso':'')+'</div></div><div class="amt">'+money(r.monto)+'<div class="sub" style="font-weight:400;text-align:right">con fianza '+money(r.fianza)+'</div></div></div>'; }).join(''):'<div class="empty">No hay casos pendientes de comité.</div>';
+}
+function renderQuality(){
+  $('#quality').innerHTML=CHECKS.map(c=>{ const n=state.rows.filter(c.fn).length; return '<div class="row q'+(n?'':' zero')+(state.quality===c.id?' act':'')+'" data-q="'+c.id+'"><span class="nm" style="font-weight:400">'+esc(c.label)+'</span><span class="qn">'+n+'</span></div>'; }).join('');
+}
+const COLS=[['n','N.'],['cliente','Cliente'],['asesor','Asesor'],['linea','Línea'],['pagaduria','Pagaduría'],['estado','Estado'],['monto','Monto solicitado','num'],['ingreso','Ingreso'],['dViab','Días viab.','num'],['dAprob','Días aprob.','num']];
+function renderTable(){
+  const f=filtered(); const {k,dir}=state.sort;
+  f.sort((a,b)=>{ const x=a[k],y=b[k]; if(x==null&&y==null) return 0; if(x==null) return 1; if(y==null) return -1; return (x>y?1:x<y?-1:0)*dir; });
+  const shown=f.slice(0,state.limit);
+  $('#tcount').textContent=f.length+' de '+state.rows.length;
+  $('#tbl').innerHTML='<thead><tr>'+COLS.map(c=>'<th class="sortable '+(c[2]||'')+'" data-sort="'+c[0]+'">'+c[1]+(k===c[0]?(dir>0?' ↑':' ↓'):'')+'</th>').join('')+'</tr></thead><tbody>'+
+   (shown.length?shown.map(r=>'<tr class="click" data-open="'+state.rows.indexOf(r)+'"><td>'+esc(r.n)+'</td><td>'+esc(r.cliente)+'</td><td>'+esc(r.asesor)+'</td><td>'+esc(r.linea||'—')+'</td><td>'+esc(r.pagaduria||'—')+'</td><td><span class="dot" style="background:'+colorOf(r.estado)+'"></span>'+esc(LABEL[r.estado]||r.estado)+'</td><td class="num">'+money(r.monto)+'</td><td>'+fmtD(r.ingreso)+'</td><td class="num">'+(r.dViab==null?'—':r.dViab)+'</td><td class="num">'+(r.dAprob==null?'—':r.dAprob)+'</td></tr>').join(''):'<tr><td colspan="10" class="empty">Ninguna solicitud coincide con los filtros.</td></tr>')+'</tbody>';
+  $('#btnMore').style.display=f.length>state.limit?'block':'none';
+}
+function openDrawer(i){
+  const r=state.rows[i]; if(!r) return;
+  const step=(l,d,extra)=>'<li class="'+(d?'on':'')+'"><div>'+l+'</div><div class="dd">'+(d?fmtD(d)+(extra!=null?' · '+extra+' día(s) desde el paso anterior':''):'Sin fecha registrada')+'</div></li>';
+  $('#drawer').innerHTML='<div class="hd"><div><h4>'+esc(r.cliente)+'</h4><span><span class="dot" style="background:'+colorOf(r.estado)+'"></span>'+esc(LABEL[r.estado]||r.estado)+'</span></div><button class="x" id="dClose" aria-label="Cerrar">×</button></div><div class="bd">'+
+   '<dl class="kv"><dt>Solicitud</dt><dd>'+esc(r.n)+'</dd>'+(r.cedula?'<dt>Cédula</dt><dd>'+esc(r.cedula)+'</dd>':'')+'<dt>Asesor</dt><dd>'+esc(r.asesor)+'</dd><dt>Línea</dt><dd>'+esc(r.linea||'Sin definir')+'</dd><dt>Pagaduría</dt><dd>'+esc(r.pagaduria||'Sin definir')+'</dd><dt>Monto solicitado</dt><dd>'+money(r.monto)+'</dd><dt>Monto con fianza</dt><dd>'+money(r.fianza)+'</dd></dl>'+
+   '<h3>Recorrido</h3><ul class="tl">'+step('Ingreso a fábrica',r.ingreso)+step('Respuesta de viabilidad',r.viable,r.dViab)+step('Decisión de comité o aprobación',r.comite,r.dAprob)+step('Desembolso',r.fDesemb,r.dDesemb)+'</ul>'+
+   '<h3>Notas</h3><div class="notes">'+(r.notas?esc(r.notas):'<span style="color:var(--muted)">Las notas aparecen al cargar el Excel o con la conexión en vivo.</span>')+'</div></div>';
+  $('#drawer').classList.add('open'); $('#veil').classList.add('on'); $('#drawer').setAttribute('aria-hidden','false');
+  const c=$('#dClose'); if(c&&c.focus) c.focus();
+}
+function closeDrawer(){ $('#drawer').classList.remove('open'); $('#veil').classList.remove('on'); $('#drawer').setAttribute('aria-hidden','true'); }
+
+/* ============ ESTADO DE CONEXIÓN ============ */
+function rel(d){ if(!d) return ''; const s=Math.max(0,(Date.now()-d.getTime())/1000); if(s<45) return 'hace unos segundos'; if(s<3600) return 'hace '+Math.round(s/60)+' min'; if(s<86400) return 'hace '+Math.round(s/3600)+' h'; return 'hace '+Math.round(s/86400)+' d'; }
+function setBanner(html,bad){ const b=$('#banner'); b.className='note'+(bad?' bad':''); b.innerHTML=html||''; }
+function renderStatus(){
+  const st=$('#status'), tx=$('#statusTxt'); st.className='status';
+  if(state.error){ st.classList.add('err'); tx.textContent='Sin conexión'; setBanner(esc(state.error),true); }
+  else if(state.source==='live'){ st.classList.add('live'); const m=state.fileMeta; tx.textContent='En vivo'+(lastCheck?' · revisado '+rel(lastCheck):''); setBanner(m?'Última edición del Excel '+rel(m.when)+(m.who?' por '+esc(m.who):'')+'.':''); }
+  else if(state.source==='setup'){ tx.textContent='Sin configurar'; setBanner(''); }
+  else { tx.textContent='Conectando…'; setBanner(''); }
+  $('#foot').textContent='Fuente: hoja Control de créditos (tabla '+CONFIG.TABLE_NAME+'). Los montos son el valor solicitado; el monto con fianza usa el factor de fianza del Excel.';
+}
+
+
+/* ============ CONEXIÓN EN VIVO (Microsoft Graph, solo lectura) ============ */
+let msalApp=null, account=null, timer=null, ctx=null, lastEtag=null, lastCheck=null;
+function liveConfigured(){ return !!CONFIG.CLIENT_ID && !!(CONFIG.FILE_SHARE_URL||(CONFIG.DRIVE_ID&&CONFIG.ITEM_ID)); }
+async function token(){
+  try{ return (await msalApp.acquireTokenSilent({scopes:SCOPES,account})).accessToken; }
+  catch(e){ await msalApp.acquireTokenRedirect({scopes:SCOPES,account}); throw e; }
+}
+async function graph(path){
+  const t=await token();
+  const res=await fetch('https://graph.microsoft.com/v1.0'+path,{headers:{Authorization:'Bearer '+t}});
+  if(!res.ok){ let m=''; try{ m=(await res.json()).error.message; }catch(_){} const e=new Error('Microsoft Graph respondió '+res.status+(m?': '+m:'')); e.status=res.status; throw e; }
+  return res.json();
+}
+async function resolveFile(){
+  if(ctx) return ctx;
+  if(CONFIG.FILE_SHARE_URL){
+    const enc='u!'+btoa(unescape(encodeURIComponent(CONFIG.FILE_SHARE_URL))).replace(/=+$/,'').replace(/\//g,'_').replace(/\+/g,'-');
+    const it=await graph('/shares/'+enc+'/driveItem?$select=id,name,parentReference');
+    ctx={drive:it.parentReference.driveId,id:it.id,name:it.name};
+  } else ctx={drive:CONFIG.DRIVE_ID,id:CONFIG.ITEM_ID,name:'Excel de créditos'};
+  return ctx;
+}
+let syncing=false;
+async function liveSync(force){
+  if(syncing) return; syncing=true;
+  try{
+    const c=await resolveFile();
+    const meta=await graph('/drives/'+c.drive+'/items/'+c.id+'?$select=name,eTag,lastModifiedDateTime,lastModifiedBy');
+    state.fileMeta={name:meta.name||c.name,when:new Date(meta.lastModifiedDateTime),who:meta.lastModifiedBy&&meta.lastModifiedBy.user?meta.lastModifiedBy.user.displayName:''};
+    lastCheck=new Date();
+    if(force||meta.eTag!==lastEtag){
+      const r=await graph('/drives/'+c.drive+'/items/'+c.id+'/workbook/tables/'+encodeURIComponent(CONFIG.TABLE_NAME)+'/range?$select=values');
+      state.rows=rowsFromMatrix(r.values); lastEtag=meta.eTag; state.source='live'; state.error='';
+      render();
+    } else { state.source='live'; state.error=''; renderStatus(); }
+  }catch(e){
+    let m=e.message||String(e);
+    if(e.status===404) m+='. Verifique que el archivo tenga la tabla '+CONFIG.TABLE_NAME+' y que el vínculo sea correcto.';
+    if(e.status===401||e.status===403) m+='. Verifique los permisos de la aplicación y que su usuario tenga acceso al archivo.';
+    state.error=m; render();
+  }finally{ syncing=false; }
+}
+async function boot(){
+  if(!liveConfigured()){ state.source='setup'; render(); return; }
+  if(!window.msal){ state.error='No se pudo cargar el inicio de sesión de Microsoft. Revise la conexión a internet y recargue la página.'; render(); return; }
+  state.source='connecting'; render();
+  try{
+    msalApp=new msal.PublicClientApplication({auth:{clientId:CONFIG.CLIENT_ID,authority:'https://login.microsoftonline.com/'+(CONFIG.TENANT_ID||'organizations'),redirectUri:location.origin+location.pathname.replace(/index\.html$/i,'')},cache:{cacheLocation:'localStorage'}});
+    const resp=await msalApp.handleRedirectPromise();
+    account=(resp&&resp.account)||msalApp.getActiveAccount()||msalApp.getAllAccounts()[0]||null;
+    if(!account){ await msalApp.loginRedirect({scopes:SCOPES}); return; }
+    msalApp.setActiveAccount(account);
+  }catch(e){ state.error='No se completó el inicio de sesión: '+(e.message||e); render(); return; }
+  await liveSync(true);
+  clearInterval(timer); timer=setInterval(()=>{ if(!document.hidden) liveSync(false); },CONFIG.REFRESH_SECONDS*1000);
+  document.addEventListener('visibilitychange',()=>{ if(!document.hidden) liveSync(false); });
+  setInterval(renderStatus,10000);
+}
+
+/* ============ EVENTOS ============ */
+function bind(){
+  $('#q').addEventListener('input',e=>{ state.q=e.target.value; state.limit=100; render(); });
+  $('#fEstado').onchange=e=>{ state.estado=e.target.value; render(); };
+  $('#fAsesor').onchange=e=>{ state.asesor=e.target.value; render(); };
+  $('#fLinea').onchange=e=>{ state.linea=e.target.value; render(); };
+  $('#fPeriodo').onchange=e=>{ state.periodo=e.target.value; render(); };
+  document.addEventListener('click',e=>{
+    if(e.target.id==='dClose'){ closeDrawer(); return; }
+    const t=e.target.closest('[data-clear],[data-estado],[data-asesor],[data-q],[data-sort],[data-open]'); if(!t) return;
+    if(t.dataset.clear){ const k=t.dataset.clear; if(k==='all'){ state.estado=state.asesor=state.linea=state.quality=''; } else state[k]=''; render(); }
+    else if(t.dataset.estado!==undefined){ state.estado=state.estado===t.dataset.estado?'':t.dataset.estado; render(); }
+    else if(t.dataset.asesor!==undefined){ state.asesor=state.asesor===t.dataset.asesor?'':t.dataset.asesor; render(); }
+    else if(t.dataset.q!==undefined){ state.quality=state.quality===t.dataset.q?'':t.dataset.q; render(); if(state.quality&&$('#tbl').scrollIntoView) $('#tbl').scrollIntoView({behavior:'smooth',block:'start'}); }
+    else if(t.dataset.sort){ const k=t.dataset.sort; state.sort=state.sort.k===k?{k,dir:-state.sort.dir}:{k,dir:1}; renderTable(); }
+    else if(t.dataset.open!==undefined){ openDrawer(+t.dataset.open); }
+  });
+  $('#btnMore').onclick=()=>{ state.limit+=100; renderTable(); };
+  $('#veil').onclick=closeDrawer;
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeDrawer(); });
+  $('#btnHelp').onclick=$('#btnHelp2').onclick=()=>$('#help').showModal(); $('#helpClose').onclick=()=>$('#help').close();
+  $('#btnRefresh').onclick=()=>{ if(msalApp&&account) liveSync(true); else location.reload(); };
+}
+
+/* ============ INICIO ============ */
+bind();
+boot();
+window.FinaApp={state,render,rowsFromMatrix,liveSync,openDrawer,CONFIG};
+})();
+
+</script>
+</body>
+</html>
